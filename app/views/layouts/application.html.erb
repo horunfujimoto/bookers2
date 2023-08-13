@@ -6,26 +6,53 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <header>
-      <% if user_signed_in? %>
-        <li>
-          <%= link_to "Log out ", destroy_user_session_path, method: :delete %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to "Sign Up", new_user_registration_path %>
-        </li>
-        <li>
-          <%= link_to "Log in", new_user_session_path %>
-        </li>
-      <% end %>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> <!--navbar-darkは背景色が暗いため文字色白になる bg-darkは背景色の選択-->
+        <div class="container">
+          <a class="navbar-brand " href="/">
+            <span>Bookers</span>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="true" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+            <ul class="navbar-nav ml-auto">
+              <% if user_signed_in? %>
+                <li class="nav-item">
+                  <%= link_to "Log out ", destroy_user_session_path, method: :delete, class: 'nav-link text-light' %>
+                </li>
+              <% else %>
+                <li class="nav-item">
+                  <%= link_to "Sign Up", new_user_registration_path, class: 'nav-link text-light' %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "Log in", new_user_session_path, class: 'nav-link text-light' %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
 
+　　<main class="mb-auto">
     <%= yield %>
+    </main>
+
+    <footer class="container mt-5"> <!--	上のマージン5-->
+      <div class="row">
+        <div class="mx-auto"> <!--margin:0 auto ; 要素を真ん中に-->
+          <p>CopyRight Infratop.inc</p>
+        </div>
+      </div>
+    </footer>
+
   </body>
 </html>
