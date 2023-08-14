@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to:'homes#top'
   devise_for :users
-  #get homes/about => 'homes#about'
+  get "home/about" => "homes#about", as: "about"
   resources :books, only: [:index, :show] #ルーティングを一括して自動生成してくれる機能
   resources :users, only: [:index, :show, :edit]
 
