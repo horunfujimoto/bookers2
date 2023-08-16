@@ -1,5 +1,12 @@
-<!--部分テンプレ.indexとは違い別のフォルダに部分テンプレートがあるため、フォルダ名も指定する必要がある-->
+<!--render partial(部分テンプレートの明示) : '部分テンプレートファイルの指定'-->
+<%= render partial:'books/list' %>
 
-
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+  <!--users-->
+  <h1>Users</h1>
+  <% @users.each do |user| %>
+  <div>
+    <%= image_tag user.get_profile_image(100,100) %> <!--booksの時とは違うため呼び出すときの記載のbook.は消す-->
+    <%= user.name %>
+    <%= link_to "Show", user_path(user.id) %> <!--booksshow--><!--呼び出した文字や画像をリンクにする方法-->
+  </div>
+  <% end %>
