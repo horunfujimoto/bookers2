@@ -1,2 +1,15 @@
-<h1>Books#index</h1>
-<p>Find me in app/views/books/index.html.erb</p>
+<!--render partial(部分テンプレートの明示) : '部分テンプレートファイルの指定'-->
+<%= render partial:'list' %>
+
+<!-- みんなの投稿一覧 -->
+<h1>Book detail</h1>
+<% @books.each do |book| %>
+  <div>
+    <%= image_tag book.user.get_profile_image(100,100) %>
+    <%= book.user.name %>
+    <%= link_to book_path(book.id) do %> <!--booksshow--><!--文字や画像をリンクにする方法-->
+      <%= book.title %>
+    <% end %>
+    <%= book.body %>
+  </div>
+<% end %>

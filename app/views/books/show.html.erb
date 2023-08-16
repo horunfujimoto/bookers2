@@ -1,2 +1,19 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<!--render partial(部分テンプレートの明示) : '部分テンプレートファイルの指定'-->
+<%= render partial:'list' %>
+
+<!-- ユーザーの投稿一覧 -->
+<h1>Book detail</h1>
+  <%= image_tag @book.user.get_profile_image(100,100) %>
+  <%= link_to user_path(@user.id) do %> <!--usersshow--><!--文字や画像をリンクにする方法-->
+    <%= @book.user.name %>
+  <% end %>
+  <%= link_to book_path(@book.id) do %> <!--booksshow-->
+    <%= @book.title %>
+  <% end %>
+  <%= @book.body %>
+  <% if @book.user == current_user %>
+    <%= link_to "Edit", edit_book_path(@book.id) %>
+  <% end %>
+  <% if @book.user == current_user %>
+    <%= link_to "Destroy", book_path(@book), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+  <% end %>
