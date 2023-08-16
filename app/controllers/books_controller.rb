@@ -22,6 +22,12 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
   end
 
+  def update
+    book = Book.find(params[:id])
+    book.update(book_params)
+    redirect_to book_path(book.id) #インスタンス変数(@book)ではない,(book.id)がなくでも動作にエラーでなかった
+  end
+
   def destroy
     book = Book.find(params[:id])
     book.destroy

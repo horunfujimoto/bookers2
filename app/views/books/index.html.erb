@@ -7,7 +7,7 @@
   <div>
     <%= image_tag book.user.get_profile_image(100,100) %>
     <%= book.user.name %>
-    <%= link_to book_path(book.id) do %> <!--booksshow--><!--文字や画像をリンクにする方法-->
+    <%= link_to book_path(book.id) do %> <!--booksshow--><!--呼び出した文字や画像をリンクにする方法-->
       <%= book.title %>
     <% end %>
     <%= book.body %>
