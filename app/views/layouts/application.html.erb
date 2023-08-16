@@ -57,8 +57,15 @@
       </nav>
     </header>
 
-　　<main class="mb-auto">
-    <%= yield %>
+　　<main>
+　　<% flash.each do |message_type, message| %>
+      <div class="flash-message <%= message_type %>"><%= message %></div>
+    <% end %>
+　　  <div class="container px-5 px-sm-0">
+　　    <div class="row">
+          <%= yield %>
+        </div>
+      </div>
     </main>
 
     <footer class="container mt-5"> <!--上のマージン5-->

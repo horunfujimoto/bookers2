@@ -2,11 +2,30 @@
 <%= render partial:'books/list' %>
 
   <!--users-->
-  <h1>Users</h1>
-  <% @users.each do |user| %>
-  <div>
-    <%= image_tag user.get_profile_image(100,100) %> <!--booksの時とは違うため呼び出すときの記載のbook.は消す-->
-    <%= user.name %>
-    <%= link_to "Show", user_path(user.id) %> <!--booksshow--><!--呼び出した文字や画像をリンクにする方法-->
+  <div class="col-md-8 offset-md-1">
+    <h2>Users</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>image</th>
+          <th>name</th>
+          <th> </th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <th>
+            <%= image_tag user.get_profile_image(100,100) %> <!--booksの時とは違うため呼び出すときの記載のbook.は消す-->
+          </th>
+          <th>
+            <%= user.name %>
+          <th>
+          <th>
+            <%= link_to "Show", user_path(user.id) %> <!--booksshow--><!--呼び出した文字や画像をリンクにする方法-->
+          </th>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
   </div>
-  <% end %>

@@ -2,18 +2,38 @@
 <%= render partial:'list' %>
 
 <!-- ユーザーの投稿一覧 -->
-<h1>Book detail</h1>
-  <%= image_tag @book.user.get_profile_image(100,100) %>
-  <%= link_to user_path(@user.id) do %> <!--usersshow--><!--文字や画像をリンクにする方法-->
-    <%= @book.user.name %>
-  <% end %>
-  <%= link_to book_path(@book.id) do %> <!--booksshow-->
-    <%= @book.title %>
-  <% end %>
-  <%= @book.body %>
-  <% if @book.user == current_user %>
-    <%= link_to "Edit", edit_book_path(@book.id) %>
-  <% end %>
-  <% if @book.user == current_user %>
-    <%= link_to "Destroy", book_path(@book), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-  <% end %>
+<div class="col-md-8 offset-md-1"> <!--名前が下に行かない-->
+  <h1>Book detail</h1>
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>
+          <%= image_tag @book.user.get_profile_image(100,100) %>
+        </th>
+        <th>
+          <%= link_to user_path(@user.id) do %> <!--usersshow--><!--文字や画像をリンクにする方法-->
+            <%= @book.user.name %>
+          <% end %>
+        </th>
+        <th>
+          <%= link_to book_path(@book.id) do %> <!--booksshow-->
+            <%= @book.title %>
+          <% end %>
+        </th>
+        <th>
+          <%= @book.body %>
+        </th>
+        <th>
+          <% if @book.user == current_user %>
+            <%= link_to "Edit", edit_book_path(@book.id) %>
+          <% end %>
+        </th>
+        <th>
+          <% if @book.user == current_user %>
+            <%= link_to "Destroy", book_path(@book), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+          <% end %>
+        </th>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,13 +1,32 @@
 <!--render partial(部分テンプレートの明示) : '部分テンプレートファイルの指定'-->
 <%= render partial:'books/list' %>
 
+<div class="col-md-8 offset-md-1">
 <h1>Books</h1>
-<% @books.each do |book| %>
-  <div>
-    <%= image_tag @user.get_profile_image(100,100) %>
-    <%= link_to book_path(book.id) do %> <!--booksshow--><!--呼び出した文字や画像をリンクにする方法-->
-      <%= book.title %> <!--@bookの指定をしてるため@userはいらない-->
+  <table class="table">
+    <thead>
+      <tr>
+        <th> </th>
+        <th>Title</th>
+        <th>Opinion</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @books.each do |book| %>
+      <tr>
+        <th>
+          <%= image_tag @user.get_profile_image(100,100) %>
+        </th>
+        <th>
+          <%= link_to book_path(book.id) do %> <!--booksshow--><!--呼び出した文字や画像をリンクにする方法-->
+            <%= book.title %> <!--@bookの指定をしてるため@userはいらない-->
+          <% end %>
+        </th>
+        <th>
+          <%= book.body %>
+        </th>
+      </tr>
     <% end %>
-    <%= book.body %>
-  </div>
-<% end %>
+    </tbody>
+  </table>
+</div>
