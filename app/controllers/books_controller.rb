@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  before_action :is_matching_login_user, only: [:edit, :update]
+
   def index
     @new_book = Book.new
     @books = Book.all
@@ -6,10 +8,16 @@ class BooksController < ApplicationController
   end
 
   def create
-    @book = Book.new(book_params) #これから作成するbook
-    @book.user_id = current_user.id
-    @book.save
-    redirect_to book_path(@book.id)
+    @new_book = Book.new(book_params) #これから作成するbook
+    @new_book.user_id = current_user.id
+    if @new_book.save
+    flash[:notice] = "Book was successfully created."
+    redirect_to book_path(@new_book)
+    else
+    @books = Book.all
+    @user = current_user
+    render :index
+    end
   end
 
   def show
@@ -23,9 +31,15 @@ class BooksController < ApplicationController
   end
 
   def update
-    book = Book.find(params[:id])
-    book.update(book_params)
-    redirect_to book_path(book.id) #インスタンス変数(@book)ではない,(book.id)がなくでも動作にエラーでなかった
+    @book = Book.find(params[:id])
+    if @book.update(book_params)
+    flash[:notice] = "You have updated book successfully."
+    redirect_to book_path(@book)
+    else
+    @new_book = Book.new
+    @user = @book.user
+    render :edit
+    end
   end
 
   def destroy
@@ -41,6 +55,13 @@ class BooksController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :profile_image, :introduction)
+  end
+
+  def is_matching_login_user
+    book = Book.find(params[:id])
+    unless book.user.id == current_user.id
+      redirect_to books_path
+    end
   end
 
 end
