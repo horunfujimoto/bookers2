@@ -36,9 +36,7 @@ class UsersController < ApplicationController
     flash[:notice] = "You have updated user successfully."
     redirect_to user_path(@user.id) #インスタンス変数(@user)ではない,(user.id)がなくでも動作にエラーでなかった
     else
-    @new_book = Book.new
-    @books = @user.books
-    redirect_to user_path(current_user.id)
+    render :edit
     end
   end
 
